@@ -1,0 +1,125 @@
+{% extends "_header.html" %}
+{% block content %}
+
+
+<main id="content " role="main ">
+
+        <section class="bg-light ">
+            <div class="container ">
+                <div class="row justify-content-md-between ">
+                    <div class="col-lg-7 space-top-1 space-bottom-2 space-bottom-lg-3 ">
+                        <div class="mb-3 ">
+                            <h1 class="h5 text-secondary ">Violas Testnet Blockchain Explorer</h1>
+                        </div>
+
+                        <form class="input-group mb-2 " action="/search " method="GET " autocomplete="off " spellcheck="false ">
+                            <input type="search " name="q" class="form-control searchautocomplete " placeholder="Search by Address / Version " autofocus>
+                            <div class="input-group-append ">
+                                <button class="btn btn-primary " type="submit " id="button-addon1 ">
+                                    search
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-n7 space-bottom-2 ">
+            <div class="container ">
+
+                <div class="row ">
+
+                    <div class="col-lg-3 mb-4 ">
+                        <div class="card h-100 ">
+                            <div class="card-body ">
+                                <div class="row ">
+                                    <div class="col-5 text-nowrap ">
+                                        <h2 class="small text-uppercase font-weight-medium text-secondary mb-0 ">
+                                            <a class="text-secondary " title="Click to view more detailed chart " href="# ">Transactions
+                                            </a>
+                                        </h2>
+                                        <a class="h5 font-weight-normal text-dark " title="Click to view more detailed chart " href="# "><a
+                                                href='/version/{{ latest_version }}'>{{ latest_version }}</a></a>
+                                    </div>
+                                    <div class="col-7 ">
+                                        <div id="home-chart-1 " class="w-100 my-n3 ml-2 " style="height: 80px; "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 mb-4 ">
+                        <div class="card h-100 ">
+                            <div class="card-body ">
+                                <div class="row ">
+                                    <div class="col-5 text-nowrap ">
+                                        <h2 class="small text-uppercase font-weight-medium text-secondary mb-0 ">
+                                            <a class="text-secondary " title="Click to view more detailed chart " href="# ">DB Version
+                                            </a>
+                                        </h2>
+                                        <a class="h5 font-weight-normal text-dark " title="Click to view more detailed chart " href="# "><a
+                                                href='/version/{{ db_version }}'>{{ db_version }}</a></a>
+                                    </div>
+                                    <div class="col-7 ">
+                                        <div id="home-chart-1 " class="w-100 my-n3 ml-2 " style="height: 80px; "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 mb-4 ">
+                        <div class="card h-100 ">
+                            <div class="card-body ">
+                                <div class="row ">
+                                    <div class="col-5 text-nowrap ">
+                                        <h2 class="small text-uppercase font-weight-medium text-secondary mb-0 ">
+                                            <a class="text-secondary " title="Click to view more detailed chart " href="# ">Start Time
+                                            </a>
+                                        </h2>
+                                        <a class="h5 font-weight-normal text-dark " title="Click to view more detailed chart " href="# ">{{ time_format(start_time) }}</a>
+                                    </div>
+
+                                    <div class="col-7 ">
+                                        <div id="home-chart-2 " class="w-100 my-n3 ml-2 " style="height: 80px; "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 mb-4 ">
+                        <div class="card h-100 ">
+                            <div class="card-body ">
+                                <div class="row ">
+                                    <div class="col-5 text-nowrap ">
+                                        <h2 class="small text-uppercase font-weight-medium text-secondary mb-0 " title="Peer-to-Peer Transactions ">
+                                            <a class="text-secondary " title="Click to view more detailed chart " href="# ">Swap Address
+                                            </a>
+                                        </h2>
+                                        {% if swap_address %}
+                                            <a href="/address/{{ swap_address }}">{{ swap_address }}</a>
+                                        {% else %}
+                                        <a class="h5 font-weight-normal text-dark " title="Click to view more detailed chart ">null</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-7 ">
+                                        <div id="home-chart-3 " class="w-100 my-n3 ml-2 " style="height: 80px; "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% include "_tx_headers.html" %}
+            </div>
+        </section>
+    </main>
+   <script src="https://libexplorer.com/src/vendor/jquery/dist/jquery.min.js?v=0.0.0.7"></script>
+	<script src="https://libexplorer.com/src/vendor/bootstrap/bootstrap.min.js?v=0.0.0.7"></script>
+
+{% endblock %}

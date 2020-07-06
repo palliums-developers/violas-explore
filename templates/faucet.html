@@ -1,0 +1,131 @@
+{% include '_header.html' %}
+{% block content %}
+    
+<main id="content" role="main">
+
+    <div class="container mb-4">
+        <div class="d-md-flex justify-content-md-between align-items-center border-bottom py-3">
+            <h1 class="h5 mb-1 mb-md-0">
+                Violas Testnet Faucet
+                <a class="text-secondary small" data-container="body" data-toggle="popover" data-placement="right"
+                    data-content="Faucet funds is free Libra tokens on the Testnet." " href=" #">
+                    <i class="fa fa-question-circle"></i>
+                </a>
+            </h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-no-gutter font-size-1 mb-0">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Faucet</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <section class="space-bottom-2">
+        <center>Note: Testnet Network coins have NO actual monetary value</center><br />
+        <div class="container">
+            <form method="post" action="./faucet" id="form1" class="js-validate">
+                <div class="aspNetHidden">
+                    <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
+                        value="woA7V1cF+AkOQkuNJOpu/8/NN0VV/RIo9Iyjm3pW/XM0dkSM473xbF48F20J3evsGPUthBiRcbB98UpKRk/q9PQjO9E3VF7cbQXH6tOEhpPldujJxpElKVFl6Cj2R8QfrnoqHKZFf52J4Yi6poWq8HowBKxnWwpD2sveu3Mra2dcXDhdYeSBmxQOfMo+WXslzbvjKOsAeDfNRx3F1fBYeNcvdkW0OD8pMxrZvfmsbSo4H3sMSrc9/a8f0YSjT8PtEiHIO7NPKGl3HrdJv8VjpOUXyEIIZqywxhtbsSWJZ61w/NNHZKtyr60kH9ZjK9OFFuUUAUNqVptWmOHzOTejBCwVwzKGLf2kPoGgV6wZiEkNxw7oKOIJuz/xjQe5SGdjY4gKeYMtaRgLGyTV9yenAlAC1B6oUtftTFfwMPGZCr13U5BLpQhgOIL7j5uiPsb49ii6e9K5FROK3pr5ze79gsyuleQjxEi+qybqsua7m9Nj/8QH+atNfWII1PZKPAgRiVwwAsuW5dJs7fzSE8r7OdoWi1Q0DOJGX6rSMCYDDjNjb4DXWMo1Vy3SOymxWumi1evP8wtfJkazPMgt4qY5szAC4PchxUlAcgxV+VBDZ9T8EalHCqnmnmCGczhtdiVkoR8z4g1AZ0ELnTn/XcamNZyPp9Pb3JFqYyBbSF25rGzwlHr68gqBWujOq+vJcosvC/LPA2HTQJZxXlAsxMAFGU6+rP8Owjs6275iWsFsSgqAgPDv4IgGMmqJX8LOFLS02dg/IWEEpSgDYRB1p8STJVbBoFkBpoWxjHjFD0cT+8NkcgLzUfw6ytRQ5QG0F9kTKPRSxJbePOvFxh56NFIvy+ONmynrtOZ6tTrWBFsLglN70WGpMwazxy08MQhPPGZ8kBxuwAiahC6GOmOEGKbvREUhwf9MrkeJcapLG+5evAI3nW0Y+Fz2FwdxwLBs/Ym8W9BVt+27wIwKnKUT1rWm+COS9wsaJg9JzuBLrCNzF5wPthQY5oFZqG8TLWQZBESIlUIRWUDCYrkF5BXW7jMRB4AEL1e44HvV6afsuzXPiTw/p4YdWuwuisO06q1GuMySKa+A1zFU6TWpS5wcDpaE5ABgGWBHi6Uhdy7ZmK3rH86BYnNCMgoa6khGexUH6L5gv9OAmdEohmIWAcVfoTOqqIfKQ6X4eut1ec7xrvt/3iSwdPyJrbNHzvvardr09mNnvUiJs5VpNjBejyTcH5ClK/awLDyMsN5aYwZ5AaW37LTVhXHkvm3cngvrPjCCefQiShPu5PV+6/Dt0i5v3UCNUxyeX3YpPIRo0qR1SURUpocjZ6FK8pFwo2KlhEMxxltRCRSC2oqcfopgXk/7V79BmZPjK0X2vTCs/hxkV8oSz9qhWC2UHuPCeWkuVDYavwW+vbxjhufES4ogwf5+YWsYCbXItLDhNQdc94TgqP3JdXTrxBtb0CJF2ec0R3er8ndVrNWIVDhpwtM5nOYtMQht0uzP2p3DDdt5C3Use8BNBpftFx2rebwQ/idXYC0buIRH/IWVHIrpuFL+9ZTWv6Sdm8xORR7eo1rDeqypbvY+cQEIRUtoO92Z6vKS9KTmtIGfpcZyj7PYndmx4Trh8rlioe8XVC9uujum3ZJqo9ZSbSsAN/Xt1GbUv2zqZ8Yu1thYmTzDEsG4/cGhMgMu23QX/4QKKRqD7ri2np8NdtzEndw=" />
+                </div>
+                <div class="aspNetHidden">
+                    <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DC584032" />
+                    <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION"
+                        value="aWzyIqrKAwCMHt0x6A+sh49z3rYMFo4Pe1SofPaReWEa+T5pjkaJCRZ1LCnsGwYI/wiYcv0IdnshRzm9CnUGvOv74HpJVfTPjzT/BlEQd+jLjLo5XBdTGydZA80bbs3BfJdNjl7Qzsdfwe4RxnwADLUaMhcfeQphtrMKswPdYfY=" />
+                </div>
+                <div class="card w-md-75 w-lg-50 mx-auto mx-auto">
+                    <div class="card-body p-4">
+                        <div class="form-group js-form-message">
+                            <label class="text-secondary" for="faucetAddress">authentication key</label>
+                            <input name="ctl00$ContentPlaceHolder1$txtAddress" type="text" maxlength="64"
+                                id="ContentPlaceHolder1_txtAddress" required="" placeholder="e.g. 034abcd...."
+                                class="form-control" data-success-class="u-has-success" data-rule-minlength="64"
+                                data-error-class="u-has-error" data-msg-minlength="Invalid Key"
+                                aria-describedby="Account address" data-msg="Please enter your address"
+                                data-name="txtAddress" data-rule-maxlength="64" />
+                        </div>
+                        <div class="form-group js-form-message">
+                            <label class="text-secondary" for="faucetAmount"> amount (Max amount is 1,000,000,000
+                                VLS) </label>
+                            <input name="ctl00$ContentPlaceHolder1$txtAmount" value="100" maxlength="10"
+                                id="ContentPlaceHolder1_txtAmount" class="form-control" required=""
+                                data-msg="Please enter a value less than or equal to 1,000,000,000" type="number"
+                                max="1000000000" data-error-class="u-has-error" data-success-class="u-has-success"
+                                placeholder="e.g. 100" />
+                        </div>
+
+                        <div class="form-group js-form-message">
+                            <label class="text-secondary" for="faucetCurrency"> currency code </label>
+                            <select name="ctl00$ContentPlaceHolder1$txtCurrency"  id="ContentPlaceHolder1_txtCurrency" class="form-control" required="" >
+                                {% for currency in registered_currencies %}
+                                <option value="{{ currency }}">{{ currency }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-center my-5">
+                            <div class="g-recaptcha" data-sitekey="6LfZiKwUAAAAAMvyjictlQH_qcNw1bffeY-UTNGu"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="reset" class="btn btn-soft-secondary mr-1">Reset</button>
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnSubmit" value="Mint"
+                            id="ContentPlaceHolder1_btnSubmit" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+
+
+
+    <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15 }' data-type="fixed"
+        data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+        <span class="fas fa-arrow-up u-go-to__inner"></span>
+    </a>
+
+
+    <script src="https://libexplorer.com/src/vendor/jquery/dist/jquery.min.js?v=0.0.0.7"></script>
+    <script src="https://libexplorer.com/src/vendor/jquery-ui/jquery-ui.js?v=0.0.0.7"></script>
+    <script src="https://libexplorer.com/src/vendor/jquery-migrate/dist/jquery-migrate.min.js?v=0.0.0.7"></script>
+    <script src="https://libexplorer.com/src/vendor/popper.js/dist/umd/popper.min.js?v=0.0.0.7"></script>
+    <script src="https://libexplorer.com/src/vendor/bootstrap/bootstrap.min.js?v=0.0.0.7"></script>
+    <script src="https://libexplorer.com/src/vendor/clipboard/dist/clipboard.min.js?v=0.0.0.7"></script>
+
+    <script src="https://libexplorer.com/src/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js?v=0.0.0.7"></script>
+
+    <script src="https://libexplorer.com/src/js/theme.min.js?v=0.0.0.7"></script>
+
+    <script>
+
+        var basePath = "";
+
+        $(document).on('ready', function () {
+            // initialization of header
+            $.HSCore.components.HSHeader.init($('#header'));
+
+            $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+            // initialization of malihu scrollbar
+            $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+            // initialization of go to
+            $.HSCore.components.HSGoTo.init('.js-go-to');
+
+            $.HSCore.components.HSClipboard.init('.js-clipboard');
+        });
+
+    </script>
+    <script src="https://libexplorer.com/src/vendor/jquery-validation/dist/jquery.validate.min.js?v=0.0.0.7"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.HSCore.components.HSValidation.init('.js-validate');
+        });
+
+    </script>
+    <script src="https://libexplorer.com/src/js/custom/combine.js?v=0.0.0.7"></script>
+
+{% endblock content %}

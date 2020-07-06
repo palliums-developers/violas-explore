@@ -1,0 +1,228 @@
+{% include "_header.html" %}
+{% block content %}
+<main id="content" role="main">
+
+    <div class="container mb-4">
+        <div class="d-md-flex d-print-none justify-content-md-between align-items-center border-bottom py-3">
+            <h1 class="h5 mb-1 mb-md-0">Transaction Details</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-no-gutter font-size-1 mb-0">
+                    <li class="breadcrumb-item"><a href="/transactions">Transactions</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Transaction Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+
+    <section class="space-top-1 space-bottom-2">
+        <div id="ContentPlaceHolder1_divMain" class="container">
+            <div class="card w-lg-75 mx-auto bg-img-hero mb-2">
+                <div class="card-body position-relative">
+                    <div class="text-center mt-n6">
+                        {% if tx["tx"].is_successful() %}
+                        <span class='btn btn-icon btn-success btn-pill mb-2'><i
+                                class='fa fa-check btn-icon__inner'></i></span>
+                        <div class='d-none d-print-block pt-8'>Status</div>
+                        <h2 class='h6 text-success'> Success</h2>
+                        {% else %}
+                        <span class='btn btn-icon btn-danger btn-pill mb-2'><i
+                                class='fa fa-close btn-icon__inner'></i></span>
+                        <div class='d-none d-print-block pt-8'>Status</div>
+                        <h2 class='h6 text-danger'> Fail</h2>
+                        {% endif %}
+                        <div class='h4'><img class='mt-n1 mr-1' width='20' src={{ url_for('static', filename='violas-icon.png') }}
+                             alt="">{{ tx["amount"] }} <span class='text-muted'>{{ tx["currency_code"] }}</span></div>
+                        <font size='2' color='brown'><i class='fa fa-info-circle'></i> This is a Testnet
+                            transaction that has no actual value </font>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0" title="Version ID">
+                                Version ID</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1 font-weight-bold">
+                            <a class="btn btn-xs btn-icon btn-soft-primary ml-1" href='/version/{{ tx["version"]-1 }}'
+                                title='View previous block'><i class='fa fa-chevron-left btn-icon__inner'></i></a>
+                            {{ tx["version"] }}
+                            <a class="btn btn-xs btn-icon btn-soft-primary mr-1" href='/version/{{ tx["version"]+1 }}'
+                                title='View next block'><i class='fa fa-chevron-right btn-icon__inner'></i></a>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Expiration Time</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1"><i class='fal fa-clock mr-1'></i> <span
+                                title='{{ time_format(tx["ex_time"]) }}'>{{ handle_time(tx["ex_time"]) }}</span> ({{ time_format(tx["ex_time"]) }})
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0" title="Transaction Type">
+                                TX Type</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1">{{ tx["code_type"] }}</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0">From</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1">
+                            {% if tx["sender"] %}
+                            <a href='/address/{{ tx["sender"] }}'>{{ tx["sender"] }}</a>
+                            {% else %}
+                            {{ tx["code_type"] }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0">To</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1">
+                            {% if tx["receiver"] %}
+                            <a href='/address/{{ tx["receiver"] }}'>{{ tx["receiver"] }}</a>
+                            {% else %}
+                              n/a
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Amount</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1">
+                            {{ tx["amount"] }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Sequence Number</h6>
+                        </div>
+                        <div class="col-md-9 font-size-1">{{ tx["tx"].get_sequence_number() }}</div>
+                    </div>
+                    <div id="ContentPlaceHolder1_divPanel">
+                        <hr class="my-4">
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Public Key</h6>
+                            </div>
+                            <div class="col-md-9 font-size-1">
+                                {{ tx["tx"].get_public_key() }}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Script Hash</h6>
+                            </div>
+                            <div class="col-md-9 font-size-1">
+                                {{ tx["tx"].get_script_hash() }}</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Signature</h6>
+                            </div>
+                            <div class="col-md-9 font-size-1">
+                                {{ tx["tx"].get_signature() }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <h6 class="font-size-1 font-weight-normal text-secondary mb-0">Signature Scheme</h6>
+                            </div>
+                            <div class="col-md-9 font-size-1">
+                                {{ tx["tx"].get_signature_scheme() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ContentPlaceHolder1_divContractEvents">
+                <div class="d-print-none w-lg-75 mx-auto" id="txAccordion">
+
+                    <div class="card mb-2">
+                        <div id="contractEvents">
+                            <div class="card-accordion-btn d-flex justify-content-between collapsed"
+                                data-toggle="collapse" data-target="#contractEventsCollapse" aria-expanded="false"
+                                aria-controls="contractEventsCollapse">
+                                Contract Events
+                                <div class="text-primary">
+                                    show <span class="card-accordion-text-more">more</span> <span
+                                        class="card-accordion-text-less">less</span>
+                                    <span class="card-btn-arrow ml-1">
+                                        <span class="fa fa-arrow-down small"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="contractEventsCollapse" class="collapse" aria-labelledby="contractEvents"
+                            data-parent="#txAccordion">
+                            <div class="card-body font-size-1 bg-img-hero">
+                                {% for event in tx["tx"].get_events() %}
+                                <div class='row mb-3'>
+                                    <div class='col-md-3'>
+                                        <h6 class='font-size-1 font-weight-normal text-secondary mb-0'>{{ event.data.enum_name }}</h6>
+                                    </div>
+                                </div>
+                                <div class='row mb-3'>
+                                    <div class='col-md-9 font-size-1'>
+                                        <pre>{{ event.__str__() }} </pre>
+                                    </div>
+                                </div>
+                                <hr class='my-4'>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="ContentPlaceHolder1_divTx">
+                <div class="d-print-none w-lg-75 mx-auto" id="txJson">
+
+                    <div class="card mb-2">
+                        <div id="tx">
+                            <div class="card-accordion-btn d-flex justify-content-between collapsed"
+                                data-toggle="collapse" data-target="#txCollapse" aria-expanded="false"
+                                aria-controls="txCollapse">
+                                Transaction
+                                <div class="text-primary">
+                                    show <span class="card-accordion-text-more">more</span> <span
+                                        class="card-accordion-text-less">less</span>
+                                    <span class="card-btn-arrow ml-1">
+                                        <span class="fa fa-arrow-down small"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="txCollapse" class="collapse" aria-labelledby="tx"
+                            data-parent="#txJson">
+                            <div class="card-body font-size-1 bg-img-hero">
+                                <div class='row mb-3'>
+                                    <div class='col-md-9 font-size-1'>
+                                        <pre>{{ tx["tx"].__str__() }} </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="d-none d-print-block text-center mt-3">
+                <p>Powered by <strong>LibExplorer</strong></p>
+            </div>
+        </div>
+    </section>
+
+</main>
+   <script src="https://libexplorer.com/src/vendor/jquery/dist/jquery.min.js?v=0.0.0.7"></script>
+	<script src="https://libexplorer.com/src/vendor/bootstrap/bootstrap.min.js?v=0.0.0.7"></script>
+{% endblock %}
+
+
+

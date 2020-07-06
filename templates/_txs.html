@@ -1,0 +1,37 @@
+{% for header in headers %}
+    <tr>
+        <td><a href='/version/{{ header[0] }}'>{{ header[0] }}</a></a>
+        </td>
+        <td class='text-nowrap'><span title={{ header[1] }}>{{ handle_time(header[1]) }}</span></td>
+        <td class='font-size-1 text-muted text-nowrap' title='{{ header[2] }} Transaction'>{{ header[2] }}</td>
+
+        {% if is_none(header[3]) %}
+            <td class='text-nowrap'>{{ shorthand(header[3], True) }}</td>
+        {% else %}
+            {% if header[3]==sender %}
+                <td class='text-nowrap'> {{ shorthand(header[3], True) }}</td>
+            {% else %}
+                <td class='text-nowrap'><a href='/address/{{ header[3] }}' title={{ header[3] }}>{{ shorthand(header[3], True) }}</a></td>
+            {% endif %}
+        {% endif %}
+
+
+        {% if header[9] == "success" %}
+        <td class='text-nowrap'><span class='badge badge-success text-uppercase w-100' title='Transaction State' >{{header[9]}}</span></td>
+        {% else %}
+        <td class='text-nowrap'><span class='badge badge-danger text-uppercase w-100' title='Transaction State'>{{header[9]}}</span></td>
+        {% endif %}
+
+        {% if is_none(header[4]) %}
+            <td>{{ shorthand(header[4], False)}}</td>
+        {% else %}
+            {% if header[4] == sender %}
+                <td>{{ shorthand(header[4], False)}}</td>
+            {% else %}
+                <td><a href='/address/{{ header[4] }}' title={{ header[4] }}>{{ shorthand(header[4], False)}}</a></td>
+            {% endif %}
+        {% endif %}
+        <td class='text-nowrap'>{{ header[5] / 10**6 }} <span class='text-muted'> {{ header[6] }}</span></td>
+        <td class='text-nowrap'>{{ header[7] }} <span class='text-muted'> {{ header[8] }}</span></td>
+    </tr>
+{% endfor %}

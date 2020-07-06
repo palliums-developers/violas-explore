@@ -1,0 +1,24 @@
+<div class="card ">
+    <div class="card-body px-0 ">
+        <div class="d-md-flex justify-content-between align-items-center px-3 mb-3 ">
+            <p class="text-secondary mb-md-0 ">Latest {{ headers.__len__() }} of total {{ total_num }} transaction</p>
+            <div class="ml-auto ">
+                {% if sender %}
+                <a class="btn btn-sm btn-soft-secondary " href="/transactions?q={{ sender }} ">View All</a>
+                {% else %}
+                <a class="btn btn-sm btn-soft-secondary " href="/transactions ">View All</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="table-responsive mb-3 ">
+            <table class="table mb-0 ">
+                <thead class="thead-light ">
+                    {% include "_tx_header.html" %}
+                </thead>
+                <tbody>
+                    {% include "_txs.html" %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,382 @@
+{% include '_header.html' %}
+{% block content %}
+<main id="content" role="main">
+
+    <section class="bg-light space-1">
+        <div class="container">
+            <div class="d-lg-flex justify-content-lg-between align-items-center">
+
+                <div class="mr-3">
+                    <div class="d-flex align-items-center mb-1">
+                        <h1 class="h5 mr-3 mb-0">Address Information</h1>
+                        <div class="text-nowrap">
+
+                            <button type="button" id="target"
+                                class="btn btn-sm btn-icon btn-soft-secondary btn-pill" data-toggle="modal"
+                                data-target="#addressModal" title="View Address QR Code">
+                                <i class="fa fa-qrcode btn-icon__inner"></i>
+                            </button>
+
+                            <div class="modal fade" id="addressModal" tabindex="-1" role="dialog"
+                                aria-labelledby="addressModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header py-2 pl-2">
+                                            <h6 class="mb-0">Address QR Code</h6>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body p-2">
+                                            <div id="qrcode" class="img-fluid text-center"></div>
+                                        </div>
+                                        <div class="modal-footer  p-2">
+                                            <span class="text-break-all text-center font-size-1 text-secondary">{{account.get_account_address()}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="referralLink" class="font-weight-normal text-secondary text-break text-truncate">
+                        {{ account.get_account_address() }}</div>
+                    <hr class="d-block d-lg-none">
+                </div>
+
+
+                <div class="text-lg-right">
+                    <h2 class="small text-uppercase font-weight-medium text-secondary mr-1 mb-0">Libra Balance <i
+                            class="far fa-wallet ml-1"></i>
+                    </h2>
+                    <span class="h4 font-weight-normal text-nowrap">
+                        <img class="mt-n1" width="20" src={{ url_for("static", filename="violas-icon.png") }} alt="Libra">
+                        {{ libra_balance / 10**6 }} <span class='text-muted'>LIB</span>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="space-bottom-2">
+
+        <div class="bg-light border-bottom">
+            <div class="container">
+                <ul class="nav nav-tabs nav_tabs1 border-bottom-0" id="addressTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview"
+                            onclick="javascript:updatehash('');" role="tab" aria-controls="overview"
+                            aria-selected="true">
+                            Overview
+                        </a>
+                    </li>
+                    <li id="ContentPlaceHolder1_li_stat" class="nav-item">
+                        <a class="nav-link" id="stats-tab" onclick="javascript:updatehash('stats');"
+                            data-toggle="tab" href="#stats" role="tab" aria-controls="stats" aria-selected="false">
+                            Stats
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="container space-top-1">
+            <div class="tab-content" id="addressTabContent">
+
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+
+                    {% include "_tx_headers.html" %}
+
+                </div>
+
+
+                <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+
+                    <div id="addressStatsAccordion">
+
+                        <div class="card mb-2">
+                            <div id="addressGeneralStats">
+                                <div class="card-accordion-btn d-flex justify-content-between"
+                                    data-toggle="collapse" data-target="#addressGeneralStatsCollapse"
+                                    aria-expanded="false" aria-controls="addressGeneralStatsCollapse">
+                                    Total Transactions
+                                </div>
+                            </div>
+                            <div id="addressGeneralStatsCollapse" class="collapse show"
+                                aria-labelledby="addressGeneralStats">
+                                <div class="card-body font-size-1 bg-img-hero"
+                                    style="background-image: url(/src/svg/components/bg-elements-6-1.svg);">
+                                    <div class='row mb-3'>
+                                        <div class='col-md-3'>
+                                            <h6 class='font-size-1 font-weight-normal text-secondary mb-0'>Sent TXs
+                                            </h6>
+                                        </div>
+                                        <div class='col-md-9 font-size-1 font-weight-normal'><a
+                                                href='/transactions?q={{ account.get_account_address() }}&f=1'>{{ send_num }}</a>
+                                        </div>
+                                    </div>
+                                    <div class='row mb-3'>
+                                        <div class='col-md-3'>
+                                            <h6 class='font-size-1 font-weight-normal text-secondary mb-0'>Received
+                                                TXs</h6>
+                                        </div>
+                                        <div class='col-md-9 font-size-1 font-weight-normal'>
+                                            <a href='/transactions?q={{ account.get_account_address() }}&f=1'>{{ received_num }}</a>
+                                        </div>
+                                    </div>
+                                    <div class='row mb-3'>
+                                        <div class='col-md-3'>
+                                            <h6 class='font-size-1 font-weight-bold text-secondary mb-0'>Total TXs
+                                            </h6>
+                                        </div>
+                                        <div class='col-md-9 font-size-1 font-weight-bold'><a
+                                                href='/transactions?q={{ account.get_account_address() }}&f=0'>{{ total_num }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="addressBalances">
+                                <div class="card-accordion-btn d-flex justify-content-between"
+                                    data-toggle="collapse" data-target="#addressBalancesCollapse"
+                                    aria-expanded="false" aria-controls="addressBalancesCollapse">
+                                    Currency Balances
+                                </div>
+                            </div>
+                            <div id="addressBalancesCollapse" class="collapse show"
+                                aria-labelledby="addressBalances">
+                                <div class="card-body font-size-1 bg-img-hero">
+                                    <div class='row mb-3'>
+                                        <div class='col-md-9 font-size-1 font-weight-normal'><pre>{{ balances }}</pre></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="liquidityBalances">
+                                <div class="card-accordion-btn d-flex justify-content-between"
+                                    data-toggle="collapse" data-target="#liquidityBalancesCollapse"
+                                    aria-expanded="false" aria-controls="liquidityBalancesCollapse">
+                                    Liquidity Balances
+                                </div>
+                            </div>
+                            <div id="liquidityBalancesCollapse" class="collapse show"
+                                aria-labelledby="liquidityBalances">
+                                <div class="card-body font-size-1 bg-img-hero">
+                                    <div class='row mb-3'>
+                                        <div class='col-md-9 font-size-1 font-weight-normal'><pre>{{ liquidity_balances }}</pre></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="accountState">
+                                <div class="card-accordion-btn d-flex justify-content-between"
+                                    data-toggle="collapse" data-target="#accountStateCollapse"
+                                    aria-expanded="false" aria-controls="accountStateCollapse">
+                                    Account State
+                                </div>
+                            </div>
+                            <div id="accountStateCollapse" class="collapse"
+                                aria-labelledby="accountState">
+                                <div class="card-body font-size-1 bg-img-hero">
+                                    <div class='row mb-3'>
+                                        <div class='col-md-9 font-size-1 font-weight-normal'><pre>{{ account.__str__() }}</pre></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="u-sticky-footer bg-dark">
+
+    <div class="container py-4">
+        <div class="d-md-flex justify-content-between align-items-center">
+            <p class="text-muted mb-0">
+                LibExplorer © 2020 <span class="mx-1">|</span> Made with <span style="color:red;">❤</span> by the
+                team behind <a class="text-white mr-2" href="https://etherscan.io/">Etherscan</a>
+            </p>
+            <div class="d-sm-flex align-items-center">
+                <div>
+                    <a class="text-muted mr-3" href="https://twitter.com/libexplorerHQ" rel="nofollow"
+                        target="_blank"><i class="fab fa-twitter mr-1"></i> Twitter</a>
+                    <a class="text-muted mr-3" href="/contactus"><i class="far fa-envelope mr-1"></i> Contact Us</a>
+                </div>
+                <div class="position-relative">
+                    <button id="dropdownSingleButtonInvoker"
+                        class="btn btn-sm btn-soft-light dropdown-toggle dropdown-toggle-change" type="button"
+                        aria-controls="dropdownSingleButton" aria-haspopup="true" aria-expanded="false"
+                        data-unfold-target="#dropdownSingleButton" data-unfold-type="css-animation"
+                        data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true"
+                        data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                        <img class='rounded-circle mt-n1 mr-1' width='15' height='15'
+                            src='/src/vendor/flag-icon-css/flags/4x3/us.svg?v=0.0.0.7'
+                            alt='English'><span>English</span>
+                    </button>
+                    <div id="dropdownSingleButton"
+                        class="dropdown-menu dropdown-unfold dropdown-menu-bottom dropdown-menu-sm-right"
+                        aria-labelledby="dropdownSingleButtonInvoker" style="bottom: 40px;">
+
+                        <div class="px-4" style="width:150px">
+                            <h4 class="h6 font-weight-medium">Languages</h4>
+                            <ul class="list-unstyled list-language mb-0">
+                                <li class="mb-2">
+                                    <a class='link-dark active' href='/'><img class='rounded-circle mr-1' width='15'
+                                            height='15' src='/src/vendor/flag-icon-css/flags/4x3/us.svg?v=0.0.0.7'
+                                            alt='English'>English</a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class='link-dark ' href='/cn/'><img class='rounded-circle mr-1' width='15'
+                                            height='15' src='/src/vendor/flag-icon-css/flags/4x3/cn.svg?v=0.0.0.7'
+                                            alt='中文'>中文</a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class='link-dark ' href='/jp/'><img class='rounded-circle mr-1' width='15'
+                                            height='15' src='/src/vendor/flag-icon-css/flags/4x3/jp.svg?v=0.0.0.7'
+                                            alt='日語'>日語</a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class='link-dark ' href='/id/'><img class='rounded-circle mr-1' width='15'
+                                            height='15' src='/src/vendor/flag-icon-css/flags/4x3/id.svg?v=0.0.0.7'
+                                            alt='Indonesian'>Indonesian</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+<a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15 }' data-type="fixed"
+    data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+    <span class="fas fa-arrow-up u-go-to__inner"></span>
+</a>
+
+
+<script src="https://libexplorer.com/src/vendor/jquery/dist/jquery.min.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/vendor/jquery-ui/jquery-ui.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/vendor/jquery-migrate/dist/jquery-migrate.min.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/vendor/popper.js/dist/umd/popper.min.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/vendor/bootstrap/bootstrap.min.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/vendor/clipboard/dist/clipboard.min.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js?v=0.0.0.7"></script>
+<script src="https://libexplorer.com/src/js/theme.min.js?v=0.0.0.7"></script>
+
+<script>
+
+    var basePath = "";
+
+    $(document).on('ready', function () {
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#header'));
+
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+        // initialization of malihu scrollbar
+        $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+        // initialization of go to
+        $.HSCore.components.HSGoTo.init('.js-go-to');
+
+        $.HSCore.components.HSClipboard.init('.js-clipboard');
+    });
+
+</script>
+<script src="https://libexplorer.com/src/js/qrcode.min.js?v=0.0.0.7"></script>
+<script>
+
+    var hash = window.location.hash.substring(1);
+
+    $(document).on('ready', function () {
+
+        if (hash != '') {
+            activaTab(hash);
+        };
+
+        $("#form1").submit(function () {
+            $(this).submit(function () {
+                return false;
+            });
+            return true;
+        });
+
+        $('#btnGetLib').on('click', function () {
+            // $(this).prop('disabled', 'disabled');
+            $(this).html('<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span> </div> processing..')
+        });
+
+        $('.js-btn-swipe').on('click', function () {
+            $('#card-1').toggleClass('d-none');
+            $('#card-2').toggleClass('d-block');
+        });
+
+        var xQRCodeCreated = false;
+        $("#target").click(function () {
+            showQRCodeBox()
+        });
+        function showQRCodeBox() {
+            var straddress = document.getElementById("referralLink").innerHTML;
+            console.log(straddress);
+            if (xQRCodeCreated == false) {
+                var qrcode = new QRCode("qrcode", {
+                    text: straddress,
+                    width: 280,
+                    height: 280,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                }
+                );
+            };
+            xQRCodeCreated = true;
+
+        }
+
+    });
+
+    function activaTab(tab) {
+
+        updatehash(hash);
+
+        $('.nav_tabs1 a[href="#' + tab + '"]').tab('show');
+    }
+
+    function updatehash(strhash) {
+        if (strhash == '') {
+            var baseUrl = window.location.href.split('#')[0];
+            //history.replaceState("", document.title, window.location.pathname);
+            history.replaceState("", document.title, baseUrl);
+        } else {
+            var baseUrl = window.location.href.split('#')[0];
+            history.replaceState("", document.title, baseUrl + '#' + strhash);
+        };
+        return true;
+    }
+</script>
+<script src="/src/js/custom/combine.js?v=0.0.0.7"></script>
+
+
+{% endblock content %}
+
+   

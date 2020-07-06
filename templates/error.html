@@ -1,0 +1,18 @@
+{% include '_header.html' %}
+{% block content %}
+    
+<main role="main">
+    <div class="container space-2">
+        <div class="row">
+            <div class="col-md-6 order-md-1 mt-md-11">
+                <h1 class="font-weight-medium">Error occured</h1>
+                <p class="mb-0"><pre>{{ message }}</pre></p>
+                <a class="btn btn-primary" href="/">
+                    <i class="fa fa-long-arrow-left mr-1"></i> Back Home
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

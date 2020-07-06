@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Violas Explorer</title>
+    <meta name=" viewport " content=" width=device-width, initial-scale=1, shrink-to-fit=no "/>
+    <link href={{ url_for("static", filename="font-awesome.css") }} type="text/css" rel="stylesheet">
+    <link href="https://libexplorer.com/src/css/theme.min.css?v=0.0.0.7" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<header id="header " class="u-header u-header--bg-transparent bg-light ">
+
+    <div id="logoAndNav " class="container ">
+
+        <nav class="js-mega-menu navbar navbar-expand-lg u-header__navbar u-header__navbar--no-space ">
+            <a class="navbar-brand u-header__navbar-brand text-nowrap " href="/ " aria-label="libexplorer " >
+                <div class="d-flex align-items-center mb-1" >
+                <h1 class="h4 mr-3 mb-0" style="color: black; font-weight: bolder" >Violas Testnet</h1>
+                </div>
+            </a>
+
+
+            <button type="button " class="navbar-toggler btn u-hamburger " aria-label="Toggle navigation "
+                    aria-expanded="false " aria-controls="navBar " data-toggle="collapse " data-target="#navBar ">
+                        <span id="hamburgerTrigger " class="u-hamburger__box ">
+                            <span class="u-hamburger__inner "></span>
+                        </span>
+            </button>
+            <div id="navBar " class="collapse navbar-collapse u-header__navbar-collapse pt-3 py-lg-0 ">
+                <ul class="navbar-nav u-header__navbar-nav ">
+
+                    <li id="li_home " class="nav-item u-header__nav-item active ">
+                        <a class="nav-link u-header__nav-link " href="/ ">Home</a>
+                    </li>
+                    <li id="li_transactions " class="nav-item u-header__nav-item ">
+                        <a class="nav-link u-header__nav-link " href="/transactions ">Transactions</a>
+                    </li>
+                    <li id="li_faucet " class="nav-item u-header__nav-item ">
+                        <a class="nav-link u-header__nav-link " href="/faucet ">Faucet</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </nav>
+
+    </div>
+</header>
+{% block content %}{% endblock %}
+
+<footer class="u-sticky-footer bg-dark">
+
+    <div class="container py-4">
+        <div class="d-md-flex justify-content-between align-items-center">
+            <p class="text-muted mb-0">&copy; 2020 Violas Explorer. All rights reserved.</p>
+        </div>
+    </div>
+
+</footer>
+</body>
+
+</html>
