@@ -97,11 +97,11 @@
                                 <div class="row ">
                                     <div class="col-5 text-nowrap ">
                                         <h2 class="small text-uppercase font-weight-medium text-secondary mb-0 " title="Peer-to-Peer Transactions ">
-                                            <a class="text-secondary " title="Click to view more detailed chart " href="# ">Swap Address
+                                            <a class="text-secondary " title="Click to view more detailed chart " href="/address/{{ swap_address }}">Swap Address
                                             </a>
                                         </h2>
                                         {% if swap_address %}
-                                            <a href="/address/{{ swap_address }}">{{ swap_address }}</a>
+                                            <a class="w-lg-100" href="/address/{{ swap_address }}">{{ swap_address }}</a>
                                         {% else %}
                                         <a class="h5 font-weight-normal text-dark " title="Click to view more detailed chart ">null</a>
                                         {% endif %}
