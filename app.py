@@ -63,7 +63,7 @@ def handle_time(unix_timestamp):
     return f"{diff // 24}" + ' day ' + f"{diff % 24}" + ' hrs ' + f"{suffix}"
 
 def time_format(timestamp):
-    dt = datetime.fromtimestamp(timestamp)
+    dt = datetime.fromtimestamp(timestamp+60*60*8)
     return str(dt)
 
 
