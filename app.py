@@ -87,7 +87,7 @@ def index():
     headers = client.get_latest_user_tx_headers(0, INDEX_SHOW_TX_NUM)
     latest_version = client.get_latest_version()
     total_num = client.get_user_tx_num()
-    start_time = client.get_transaction(1).get_expiration_time()
+    start_time = client.get_transaction(2).get_expiration_time()
     swap_address = client.get_swap_address()
     db_version = client.get_db_version()
     return render_template("index.html", headers=headers, latest_version=latest_version, handle_time=handle_time,
