@@ -1,6 +1,7 @@
 from violas_client import Client
 from violas_client.libra_client.account import Account
 from violas_client.move_core_types.language_storage import core_code_address
+from violas_client.lbrtypes.account_config import association_address
 from db import get_latest_txs, get_send_txs, get_receive_txs, get_tx_header, get_txs_num, get_account_latest_txs, get_account_txs_num, get_send_num, get_receive_num, get_db_version
 
 class ViolasClient():
