@@ -7,7 +7,7 @@ from violas_client.lbrtypes.bytecode import CodeType
 from violas_client.extypes.bytecode import CodeType as ExchangeType
 
 
-db_version = 1736500
+db_version = 0
 def get_db_version():
     return db_version
 
