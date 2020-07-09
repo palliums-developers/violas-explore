@@ -32,7 +32,7 @@
                         <h2 class='h6 text-danger'> Fail</h2>
                         {% endif %}
                         <div class='h4'><img class='mt-n1 mr-1' width='20' src={{ url_for('static', filename='violas-icon.png') }}
-                             alt="">{{ tx["amount"] / 10**6 }} <span class='text-muted'>{{ tx["currency_code"] }}</span></div>
+                             alt="">{{ tx["amount"]}} <span class='text-muted'>{{ tx["currency_code"] }}</span></div>
                         <font size='2' color='brown'><i class='fa fa-info-circle'></i> This is a Testnet
                             transaction that has no actual value </font>
                     </div>

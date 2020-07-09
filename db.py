@@ -7,7 +7,7 @@ from violas_client.lbrtypes.bytecode import CodeType
 from violas_client.extypes.bytecode import CodeType as ExchangeType
 
 
-db_version = 0
+db_version = 1703000
 def get_db_version():
     return db_version
 
@@ -15,19 +15,19 @@ def get_tx_header(tx):
     code_type = tx.get_code_type()
     if code_type == ExchangeType.ADD_LIQUIDITY:
         event = tx.get_swap_event()
-        currency_code = f"{event.coina} --- {event.coinb}"
-        amount = f"{event.deposit_amounta} --- {event.deposit_amountb}"
+        currency_code = f"{event.coina}--{event.coinb}"
+        amount = f"{event.deposit_amounta}--{event.deposit_amountb}"
     elif code_type == ExchangeType.REMOVE_LIQUIDITY:
         event = tx.get_swap_event()
-        currency_code = f"{event.coina} --- {event.coinb}"
-        amount = f"{event.withdraw_amounta} --- {event.withdraw_amountb}"
+        currency_code = f"{event.coina}--{event.coinb}"
+        amount = f"{event.withdraw_amounta}--{event.withdraw_amountb}"
     elif code_type == ExchangeType.SWAP:
         event = tx.get_swap_event()
-        currency_code = f"{event.input_name} - {event.output_name}"
-        amount = f"{event.withdraw_amounta} --> {event.withdraw_amountb}"
+        currency_code = f"{event.input_name}--{event.output_name}"
+        amount = f"{event.input_amount}-->{event.output_amount}"
     else:
         currency_code = tx.get_currency_code()
-        amount = tx.get_amount()
+        amount = str(tx.get_amount())
 
     if currency_code is None:
         currency_code = "LBR"
@@ -61,7 +61,7 @@ def create_violas_table():
         cursor.execute(f"drop table violas")
     except:
         pass
-    sql = f"create table violas (version int primary key, expiration_time int, type varchar(32), sender varchar(32), receiver varchar(32), amount int, currency_code, gas_fee int, gas_currency varchar ,  success varchar)"
+    sql = f"create table violas (version int primary key, expiration_time int, type varchar(32), sender varchar(32), receiver varchar(32), amount varchar(100) , currency_code, gas_fee int, gas_currency varchar ,  success varchar)"
     cursor.execute(sql)
     sql = "create index sender on violas (sender)"
     cursor.execute(sql)
@@ -73,7 +73,7 @@ def insert_transaction(tx: TransactionView):
     conn = sqlite3.connect('txs.db')
     cursor = conn.cursor()
     header = list(get_tx_header(tx).values())
-    sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}',{header[5]},'{header[6]}',{header[7]},'{header[8]}','{header[9]}')"
+    sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}','{header[5]}','{header[6]}','{header[7]}','{header[8]}','{header[9]}')"
     cursor.execute(sql)
     conn.commit()
 
@@ -82,7 +82,7 @@ def insert_transactions(txs: TransactionView):
     cursor = conn.cursor()
     for tx in txs:
         header = list(get_tx_header(tx).values())
-        sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}',{header[5]},'{header[6]}',{header[7]},'{header[8]}','{header[9]}')"
+        sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}','{header[5]}','{header[6]}','{header[7]}','{header[8]}','{header[9]}')"
         cursor.execute(sql)
     conn.commit()
 
@@ -151,7 +151,6 @@ class ViolasDB(Thread):
     def run(self):
         global db_version
         create_violas_table()
-        db_version = 0
         limit = 500
         while True:
             try:
