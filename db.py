@@ -24,13 +24,14 @@ def get_tx_header(tx):
         amount = f"{event.input_amount}{event.input_name}->{event.output_amount}{event.output_name}"
     else:
         currency_code = tx.get_currency_code()
+        if currency_code is None:
+            currency_code = "LBR"
         amount = tx.get_amount()
         if amount is None:
             amount = 0
         amount = f"{amount} {currency_code}"
 
-    if currency_code is None:
-        currency_code = "LBR"
+
     if amount is None:
         amount = 0
     gas_currency = tx.get_gas_currency()
