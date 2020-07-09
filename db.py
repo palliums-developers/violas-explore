@@ -7,19 +7,19 @@ from violas_client.lbrtypes.bytecode import CodeType
 from violas_client.extypes.bytecode import CodeType as ExchangeType
 
 
-db_version = 0
+db_version = 1736500
 def get_db_version():
     return db_version
 
 def get_tx_header(tx):
     code_type = tx.get_code_type()
-    if code_type == ExchangeType.ADD_LIQUIDITY:
+    if code_type == ExchangeType.ADD_LIQUIDITY and tx.is_successful():
         event = tx.get_swap_event()
         amount = f"{event.deposit_amounta}{event.coina}--{event.deposit_amountb}{event.coinb}"
-    elif code_type == ExchangeType.REMOVE_LIQUIDITY:
+    elif code_type == ExchangeType.REMOVE_LIQUIDITY and tx.is_successful():
         event = tx.get_swap_event()
         amount = f"{event.withdraw_amounta}{event.coina}--{event.withdraw_amountb}{event.coinb}"
-    elif code_type == ExchangeType.SWAP:
+    elif code_type == ExchangeType.SWAP and tx.is_successful():
         event = tx.get_swap_event()
         amount = f"{event.input_amount}{event.input_name}->{event.output_amount}{event.output_name}"
     else:
