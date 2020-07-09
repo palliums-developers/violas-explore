@@ -15,19 +15,19 @@ def get_tx_header(tx):
     code_type = tx.get_code_type()
     if code_type == ExchangeType.ADD_LIQUIDITY:
         event = tx.get_swap_event()
-        currency_code = f"{event.coina}--{event.coinb}"
-        amount = f"{event.deposit_amounta}--{event.deposit_amountb}"
+        amount = f"{event.deposit_amounta}{event.coina}--{event.deposit_amountb}{event.coinb}"
     elif code_type == ExchangeType.REMOVE_LIQUIDITY:
         event = tx.get_swap_event()
-        currency_code = f"{event.coina}--{event.coinb}"
-        amount = f"{event.withdraw_amounta}--{event.withdraw_amountb}"
+        amount = f"{event.withdraw_amounta}{event.coina}--{event.withdraw_amountb}{event.coinb}"
     elif code_type == ExchangeType.SWAP:
         event = tx.get_swap_event()
-        currency_code = f"{event.input_name}--{event.output_name}"
-        amount = f"{event.input_amount}-->{event.output_amount}"
+        amount = f"{event.input_amount}{event.input_name}->{event.output_amount}{event.output_name}"
     else:
         currency_code = tx.get_currency_code()
-        amount = str(tx.get_amount())
+        amount = tx.get_amount()
+        if amount is None:
+            amount = 0
+        amount = f"{amount} {currency_code}"
 
     if currency_code is None:
         currency_code = "LBR"
@@ -47,7 +47,6 @@ def get_tx_header(tx):
         "sender": tx.get_sender(),
         "receiver": tx.get_receiver(),
         "amount": amount,
-        "currency_code": currency_code,
         "gas_used": 0,
         "gas_currency": gas_currency,
         "state": state
@@ -61,7 +60,7 @@ def create_violas_table():
         cursor.execute(f"drop table violas")
     except:
         pass
-    sql = f"create table violas (version int primary key, expiration_time int, type varchar(32), sender varchar(32), receiver varchar(32), amount varchar(100) , currency_code, gas_fee int, gas_currency varchar ,  success varchar)"
+    sql = f"create table violas (version int primary key, expiration_time int, type varchar(32), sender varchar(32), receiver varchar(32), amount varchar(100) , gas_fee int, gas_currency varchar ,  success varchar)"
     cursor.execute(sql)
     sql = "create index sender on violas (sender)"
     cursor.execute(sql)
@@ -73,7 +72,7 @@ def insert_transaction(tx: TransactionView):
     conn = sqlite3.connect('txs.db')
     cursor = conn.cursor()
     header = list(get_tx_header(tx).values())
-    sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}','{header[5]}','{header[6]}','{header[7]}','{header[8]}','{header[9]}')"
+    sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}','{header[5]}',{header[6]},'{header[7]}','{header[8]}')"
     cursor.execute(sql)
     conn.commit()
 
@@ -82,7 +81,7 @@ def insert_transactions(txs: TransactionView):
     cursor = conn.cursor()
     for tx in txs:
         header = list(get_tx_header(tx).values())
-        sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}','{header[5]}','{header[6]}','{header[7]}','{header[8]}','{header[9]}')"
+        sql = f"insert into violas values ({header[0]},{header[1]},'{header[2]}','{header[3]}','{header[4]}','{header[5]}',{header[6]},'{header[7]}','{header[8]}')"
         cursor.execute(sql)
     conn.commit()
 

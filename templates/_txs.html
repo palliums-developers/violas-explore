@@ -16,10 +16,10 @@
         {% endif %}
 
 
-        {% if header[9] == "success" %}
-        <td class='text-nowrap'><span class='badge badge-success text-uppercase w-100' title='Transaction State' >{{header[9]}}</span></td>
+        {% if header[8] == "success" %}
+        <td class='text-nowrap'><span class='badge badge-success text-uppercase w-100' title='Transaction State' >{{header[8]}}</span></td>
         {% else %}
-        <td class='text-nowrap'><span class='badge badge-danger text-uppercase w-100' title='Transaction State'>{{header[9]}}</span></td>
+        <td class='text-nowrap'><span class='badge badge-danger text-uppercase w-100' title='Transaction State'>{{header[8]}}</span></td>
         {% endif %}
 
         {% if is_none(header[4]) %}
@@ -31,7 +31,7 @@
                 <td><a href='/address/{{ header[4] }}' title={{ header[4] }}>{{ shorthand(header[4], False)}}</a></td>
             {% endif %}
         {% endif %}
-        <td class='text-nowrap'>{{ header[5]  }} <span class='text-muted'> {{ header[6] }}</span></td>
-        <td class='text-nowrap'>{{ header[7] }} <span class='text-muted'> {{ header[8] }}</span></td>
+        <td class='text-nowrap'>{{ header[5]  }} </td>
+        <td class='text-nowrap'>{{ header[6] }} <span class='text-muted'> {{ header[7] }}</span></td>
     </tr>
 {% endfor %}
