@@ -6,6 +6,8 @@ from db import get_latest_txs, get_send_txs, get_receive_txs, get_tx_header, get
 class ViolasClient():
     def __init__(self, url, faucet_file=None):
         self.client = Client.new(url, faucet_file)
+        client.set_exchange_module_address(core_code_address())
+        client.set_exchange_owner_address(association_address())
         self.swap_address=core_code_address().hex()
         self.url = url
 
