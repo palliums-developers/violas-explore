@@ -15,13 +15,13 @@ def get_tx_header(tx):
     code_type = tx.get_code_type()
     if code_type == ExchangeType.ADD_LIQUIDITY and tx.is_successful():
         event = tx.get_swap_event()
-        amount = f"{event.deposit_amounta}{event.coina}--{event.deposit_amountb}{event.coinb}"
+        amount = f"{event.deposit_amounta/10**6}{event.coina}--{event.deposit_amountb/10**6}{event.coinb}"
     elif code_type == ExchangeType.REMOVE_LIQUIDITY and tx.is_successful():
         event = tx.get_swap_event()
-        amount = f"{event.withdraw_amounta}{event.coina}--{event.withdraw_amountb}{event.coinb}"
+        amount = f"{event.withdraw_amounta/10**6}{event.coina}--{event.withdraw_amountb/10**6}{event.coinb}"
     elif code_type == ExchangeType.SWAP and tx.is_successful():
         event = tx.get_swap_event()
-        amount = f"{event.input_amount}{event.input_name}->{event.output_amount}{event.output_name}"
+        amount = f"{event.input_amount/10**6}{event.input_name}->{event.output_amount/10**6}{event.output_name}"
     else:
         currency_code = tx.get_currency_code()
         if currency_code is None:
@@ -29,11 +29,8 @@ def get_tx_header(tx):
         amount = tx.get_amount()
         if amount is None:
             amount = 0
-        amount = f"{amount} {currency_code}"
+        amount = f"{amount/10**6} {currency_code}"
 
-
-    if amount is None:
-        amount = 0
     gas_currency = tx.get_gas_currency()
     if gas_currency is None:
         gas_currency = "LBR"
@@ -48,7 +45,7 @@ def get_tx_header(tx):
         "sender": tx.get_sender(),
         "receiver": tx.get_receiver(),
         "amount": amount,
-        "gas_used": 0,
+        "gas_used": tx.get_gas_used_price(),
         "gas_currency": gas_currency,
         "state": state
     }
