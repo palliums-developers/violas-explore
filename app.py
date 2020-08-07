@@ -8,7 +8,7 @@ import json
 
 app = Flask(__name__)
 
-client = ViolasClient("http://127.0.0.1:50001")
+client = ViolasClient("https://client.testnet.libra.org")
 
 
 INDEX_SHOW_TX_NUM = 15
