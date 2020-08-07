@@ -1,5 +1,5 @@
 
-sudo docker rm -f violas-explorer
-sudo docker rmi violas-explorer
+sudo docker rm -f violas-explore
+sudo docker rmi violas-explore
 ./build-docker.sh
 ./run-docker.sh

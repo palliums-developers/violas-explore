@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker build -t violas-explorer .
+sudo docker build -t violas-explore .
