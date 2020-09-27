@@ -14,7 +14,7 @@ RUN cp ./libra-client/violas_client /usr/local/lib/python3.6/dist-packages/ -rf
 WORKDIR .
 RUN mkdir app
 COPY . /app/
-RUN pip3 install -r /app/requirements.txt
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r /app/requirements.txt
 
 CMD ["python3", "/app/app.py"]
 

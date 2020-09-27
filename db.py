@@ -8,6 +8,7 @@ from violas_client.extypes.bytecode import CodeType as ExchangeType
 
 
 db_version = 0
+
 def get_db_version():
     return db_version
 
@@ -150,8 +151,9 @@ class ViolasDB(Thread):
         create_violas_table()
         limit = 500
         while True:
-            try:
+            # try:
                 user_txs = []
+                print(db_version)
                 txs = self.client.get_transactions(db_version, limit)
                 if len(txs) == 0:
                     time.sleep(1)
@@ -161,8 +163,8 @@ class ViolasDB(Thread):
                         user_txs.append(tx)
                 insert_transactions(user_txs)
                 db_version += len(txs)
-            except Exception as e:
-                print(e)
+            # except Exception as e:
+            #     print(e)
 
 #
 

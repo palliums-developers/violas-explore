@@ -8,7 +8,8 @@ import json
 
 app = Flask(__name__)
 
-client = ViolasClient("https://client.testnet.libra.org")
+url = "http://47.93.114.230:50001"
+client = ViolasClient(url)
 
 
 INDEX_SHOW_TX_NUM = 15
@@ -174,6 +175,7 @@ def faucet():
     return render_template("faucet.html", registered_currencies=registered_currencies)
 
 
+from copy import deepcopy
 if __name__ == "__main__":
     t = ViolasDB(client)
     t.start()
