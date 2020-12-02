@@ -8,8 +8,8 @@ RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 #Install git
 RUN apt-get install git -y
-RUN git clone -b v0.20 https://Xing-Huang:13583744689edc@github.com/palliums-developers/libra-client.git
-RUN cp ./libra-client/violas_client /usr/local/lib/python3.6/dist-packages/ -rf
+RUN git clone -b v0.28 https://Xing-Huang:13583744689edc@github.com/palliums-developers/violas-client.git
+RUN cp ./violas-client/violas_client /usr/local/lib/python3.6/dist-packages/ -rf
 
 WORKDIR .
 RUN mkdir app
