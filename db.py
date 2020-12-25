@@ -15,13 +15,13 @@ def get_db_version():
 def get_tx_header(tx):
     code_type = tx.get_code_type()
     if code_type == ExchangeType.ADD_LIQUIDITY and tx.is_successful():
-        event = tx.get_swap_event()
+        event = tx.get_swap_type_events(code_type)[0]
         amount = f"{event.deposit_amounta/10**6}{event.coina}--{event.deposit_amountb/10**6}{event.coinb}"
     elif code_type == ExchangeType.REMOVE_LIQUIDITY and tx.is_successful():
-        event = tx.get_swap_event()
+        event = tx.get_swap_type_events(code_type)[0]
         amount = f"{event.withdraw_amounta/10**6}{event.coina}--{event.withdraw_amountb/10**6}{event.coinb}"
     elif code_type == ExchangeType.SWAP and tx.is_successful():
-        event = tx.get_swap_event()
+        event = tx.get_swap_type_events(code_type)[0]
         amount = f"{event.input_amount/10**6}{event.input_name}->{event.output_amount/10**6}{event.output_name}"
     else:
         currency_code = tx.get_currency_code()
@@ -153,7 +153,6 @@ class ViolasDB(Thread):
         while True:
             # try:
                 user_txs = []
-                print(db_version)
                 txs = self.client.get_transactions(db_version, limit)
                 if len(txs) == 0:
                     time.sleep(1)

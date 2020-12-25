@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker build -t violas-explore .
+sudo docker build --no-cache -t violas-explore .
