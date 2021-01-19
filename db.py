@@ -5,6 +5,8 @@ from threading import Thread
 from violas_client.extypes.view import TransactionView
 from violas_client.lbrtypes.bytecode import CodeType
 from violas_client.extypes.bytecode import CodeType as ExchangeType
+from violas_client.oracle_client.bytecodes import CodeType as OracleType
+from violas_client.banktypes.bytecode import CodeType as BankType
 
 
 db_version = 0
@@ -158,7 +160,7 @@ class ViolasDB(Thread):
                     time.sleep(1)
                     continue
                 for tx in txs:
-                    if tx.get_code_type() not in (CodeType.BLOCK_METADATA, CodeType.CHANGE_SET):
+                    if tx.get_code_type() not in (CodeType.BLOCK_METADATA, CodeType.CHANGE_SET, BankType.UPDATE_PRICE_FROM_ORACLE, OracleType.UPDATE_EXCHANGE_RATE):
                         user_txs.append(tx)
                 insert_transactions(user_txs)
                 db_version += len(txs)
