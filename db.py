@@ -3,7 +3,7 @@ import sqlite3
 from threading import Thread
 
 from violas_client.extypes.view import TransactionView
-from violas_client.VLStypes.bytecode import CodeType
+from violas_client.lbrtypes.bytecode import CodeType
 from violas_client.extypes.bytecode import CodeType as ExchangeType
 from violas_client.oracle_client.bytecodes import CodeType as OracleType
 from violas_client.banktypes.bytecode import CodeType as BankType
@@ -28,7 +28,7 @@ def get_tx_header(tx):
     else:
         currency_code = tx.get_currency_code()
         if currency_code is None:
-            currency_code = "LBR"
+            currency_code = "VLS"
         amount = tx.get_amount()
         if amount is None:
             amount = 0
@@ -36,7 +36,7 @@ def get_tx_header(tx):
 
     gas_currency = tx.get_gas_currency()
     if gas_currency is None:
-        gas_currency = "LBR"
+        gas_currency = "VLS"
     if tx.is_successful():
         state = "success"
     else:
