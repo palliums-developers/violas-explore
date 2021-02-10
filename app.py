@@ -100,7 +100,7 @@ def account_state(addr):
     page = int(request.args.get("p", 1))
     start = INDEX_SHOW_TX_NUM * (page-1)
     account = client.get_account_state(addr)
-    libra_balance = account.get_balance("LBR")
+    libra_balance = account.get_balance("VLS")
     if libra_balance is None:
         libra_balance = 0
     balances = client.get_balances(addr)

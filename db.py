@@ -3,7 +3,7 @@ import sqlite3
 from threading import Thread
 
 from violas_client.extypes.view import TransactionView
-from violas_client.lbrtypes.bytecode import CodeType
+from violas_client.VLStypes.bytecode import CodeType
 from violas_client.extypes.bytecode import CodeType as ExchangeType
 from violas_client.oracle_client.bytecodes import CodeType as OracleType
 from violas_client.banktypes.bytecode import CodeType as BankType
