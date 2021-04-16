@@ -104,6 +104,7 @@ def account_state(addr):
     if libra_balance is None:
         libra_balance = 0
     balances = client.get_balances(addr)
+    all_balances = client.get_all_balances(addr)
     balances = json.dumps(balances, indent=2)
     headers = client.get_account_latest_tx_headers(addr, start, INDEX_SHOW_TX_NUM)
     total_num = client.get_account_tx_num(addr)
@@ -112,7 +113,7 @@ def account_state(addr):
     liquidity_balances = client.get_liquidity_balances(addr)
     liquidity_balances = json.dumps(liquidity_balances, indent=2)
 
-    return render_template("account.html", account = account, headers=headers, balances=balances,
+    return render_template("account.html", account = account, headers=headers, balances=balances, all_balances=all_balances,
                            libra_balance=libra_balance, handle_time=handle_time, shorthand=shorthand,
                            time_format=time_format, sender=addr, is_none=is_none, send_num=send_num, received_num=received_num,
                            total_num=total_num, liquidity_balances=liquidity_balances)

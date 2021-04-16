@@ -53,6 +53,13 @@ class ViolasClient():
     def get_balances(self, addr):
         return self.client.get_balances(addr)
 
+    def get_all_balances(self, addr):
+        return dict(
+            balances = self.client.get_balances(addr),
+            borrows = self.client.bank_get_borrow_amounts(addr),
+            locks = self.client.bank_get_lock_amounts(addr),
+        )
+
     def get_send_txs(self, addr, start, limit):
         return get_send_txs(addr, start, limit)
 
