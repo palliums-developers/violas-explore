@@ -106,6 +106,7 @@ def account_state(addr):
     balances = client.get_balances(addr)
     all_balances = client.get_all_balances(addr)
     balances = json.dumps(balances, indent=2)
+    all_balances = json.dumps(all_balances, indent=2)
     headers = client.get_account_latest_tx_headers(addr, start, INDEX_SHOW_TX_NUM)
     total_num = client.get_account_tx_num(addr)
     send_num = client.get_send_tx_num(addr)
